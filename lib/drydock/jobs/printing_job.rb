@@ -1,6 +1,6 @@
-module WorkersWithPreconditions
+module Drydock
   module Job
-    class Printer < ::WorkersWithPreconditions::Job::Base
+    class Printer < ::Drydock::Job::Base
       def initialize(config)
         @message = config[:message]
       end

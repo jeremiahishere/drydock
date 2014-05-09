@@ -1,4 +1,4 @@
-module WorkersWithPreconditions
+module Drydock
   module Launcher
     class Base
       def initialize
@@ -12,7 +12,7 @@ module WorkersWithPreconditions
       end
 
       def run
-        supervisor = WorkersWithPreconditions::Supervisor.new(@jobs, @preconditions)
+        supervisor = Drydock::Supervisor.new(@jobs, @preconditions)
         supervisor.start
       end
 

@@ -1,4 +1,4 @@
-module WorkersWithPreconditions
+module Drydock
   class Worker
     def initialize(index, supervisor, mutex)
       @index = index

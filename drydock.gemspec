@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'workers_with_preconditions/version'
+require 'drydock/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "workers_with_preconditions"
-  spec.version       = WorkersWithPreconditions::VERSION
+  spec.name          = "drydock"
+  spec.version       = Drydock::VERSION
   spec.authors       = ["Jeremiah Hemphill"]
   spec.email         = ["jeremiah@cloudspace.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}

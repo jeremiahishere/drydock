@@ -1,4 +1,4 @@
-module WorkersWithPreconditions
+module Drydock
   module Job
     class Base
       def run

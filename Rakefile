@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
-require 'workers_with_preconditions'
+require 'drydock'
 
 task :test do
-  runner = WorkersWithPreconditions::Launcher::TestRun.new
+  runner = Drydock::Launcher::TestRun.new
   runner.run
 end

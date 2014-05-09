@@ -1,4 +1,4 @@
-module WorkersWithPreconditions
+module Drydock
   class Supervisor
     attr_accessor :job, :preconditions, :shared_data, :job_status
 
