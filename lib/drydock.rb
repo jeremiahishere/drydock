@@ -1,6 +1,7 @@
 require "drydock/version"
 
 require 'drydock/jobs/base'
+require 'drydock/jobs/debuggable'
 require 'drydock/jobs/printer'
 
 require 'drydock/launchers/base'

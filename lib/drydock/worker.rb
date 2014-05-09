@@ -25,9 +25,9 @@ module Drydock
       Dir.mkdir(target) unless Dir.exists?(target)
 
       # loop through job.helper_files
-      job.helper_files.each do |filename|
+      job.helper_files.each do |source_file|
         # copy from original location to target location
-        source_file = File.join(Dir.pwd, "lib/drydock/jobs", job.helper_source_dir, filename)
+        filename = source_file.split('/').last
         target_file = File.join(target, filename)
         `cp #{source_file} #{target_file}` # I am pretty sure that you have to shell out here if this is running with multiple threads
       end

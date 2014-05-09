@@ -1,6 +1,9 @@
 module Drydock
   module Job
     class Base
+      def initialize(config)
+        @config = config
+      end
 
       def helper_source_dir
         # stolen from the rails underscore method
@@ -19,8 +22,15 @@ module Drydock
       
       # list of files that should be copied into the destination folder
       # they will automatically be copied to destination/name_of_job/<filename>.sh
+      #
+      # if overriding, the file names should include the full paths
       def helper_files
-        []
+        source_dir = File.join(Dir.pwd, "lib/drydock/jobs", helper_source_dir)
+        if Dir.exists?(source_dir)
+          Dir[source_dir + "/*"]
+        else
+          []
+        end
       end
 
       # commands to add to the docker file

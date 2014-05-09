@@ -5,10 +5,6 @@ module Drydock
         @message = config[:message]
       end
 
-      def helper_files
-        ["helper.sh"]
-      end
-
       def docker_commands
         [
           "RUN echo '#{@message}'",
