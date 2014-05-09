@@ -16,7 +16,13 @@ module Drydock
         supervisor.start
       end
 
-      def add_job(identifier, klass, config, preconditions = {})
+      def add_job(args)
+        # todo: upgrade to ruby 2, then use named parameters
+        identifier = args[:name]
+        klass = args[:job]
+        config = args[:config] || {}
+        preconditions = args[:preconditions] || {}
+
         @jobs[identifier] = klass.new(config)
         @preconditions[identifier] = preconditions
       end

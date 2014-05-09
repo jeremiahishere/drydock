@@ -2,52 +2,22 @@ module Drydock
   module Launcher
     class TestRun < ::Drydock::Launcher::Base
       def setup
-        add_job(:first_job, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world'}
+        add_job(
+          name: :first_job, 
+          job: Drydock::Job::Printer, 
+          config: {:message => 'hello world'}
         )
-        add_job(:last_job, 
-          Drydock::Job::Printer, 
-          {:message => 'goodbye world'}, 
-          { :first_job => true, :middle_job => true }
+        add_job(
+          name: :last_job, 
+          job: Drydock::Job::Printer, 
+          config: {:message => 'goodbye world'}, 
+          preconditions: { :first_job => true, :middle_job => true }
         )
-        add_job(:middle_job, 
-          Drydock::Job::Printer, 
-          {:message => 'working'}, 
-          { :first_job => true }
-        )
-
-        add_job(:job_4, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 4'}
-        )
-        add_job(:job_5, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 5'}
-        )
-        add_job(:job_6, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 6'}
-        )
-        add_job(:job_7, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 7'}
-        )
-        add_job(:job_8, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 8'}
-        )
-        add_job(:job_9, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 9'}
-        )
-        add_job(:job_10, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 10'}
-        )
-        add_job(:job_11, 
-          Drydock::Job::Printer, 
-          {:message => 'hello world 11'}
+        add_job(
+          name: :middle_job, 
+          job: Drydock::Job::Printer, 
+          config: {:message => 'working'}, 
+          preconditions: { :first_job => true }
         )
       end
     end
