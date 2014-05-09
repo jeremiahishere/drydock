@@ -15,7 +15,7 @@ module Drydock
       return if !id
 
       copy_files_to_destination(@supervisor.job[id])
-      # add_docker_commands_to_template(@supervisor.job[id])
+      update_template(@supervisor.job[id])
       finish_job(id)
     end
 
@@ -33,8 +33,8 @@ module Drydock
       end
     end
 
-    def add_docket_commands_to_template(job)
-      # @supervisor.commands += job.docker_commands
+    def update_template(job)
+      @supervisor.push_commands(job.docker_commands)
     end
 
     def start_next_job

@@ -1,7 +1,7 @@
 module Drydock
   class Supervisor
-    attr_accessor :job, :preconditions, :shared_data, :job_status
-    attr_reader :template, :destination
+    attr_accessor :job, :preconditions, :shared_data, :job_status, :commands
+    attr_reader :template, :destination, :generated_commands
 
     def initialize(jobs, preconditions, template, destination)
       @job = jobs
@@ -16,8 +16,10 @@ module Drydock
         @job_status[key] = :incomplete
       end
 
-      @worker_mutex = Mutex.new
+      @command_mutex = Mutex.new
+      @commands = []
 
+      @worker_mutex = Mutex.new
       @worker_count = 1
       @worker_threads = []
       @workers = []
@@ -34,8 +36,19 @@ module Drydock
           end
         end
       end
+
       @worker_threads.each(&:join)
+
       generate_readme
+      generate_template
+    end
+
+    def generate_template
+      @generated_commands = @commands.join("\n")
+      erb = ERB.new(@template)
+      File.open(@template, 'w') do |f|
+        f.write erb.result(binding)
+      end
     end
 
     def generate_readme
@@ -54,6 +67,12 @@ module Drydock
     def all_jobs_finished?
       @worker_mutex.synchronize do
         @job_status.select { |id, value| value != :complete }.empty?
+      end
+    end
+
+    def push_commands(commands)
+      @command_mutex.synchronize do
+        @commands += commands
       end
     end
   end
