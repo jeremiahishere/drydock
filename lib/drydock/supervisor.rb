@@ -41,6 +41,7 @@ module Drydock
 
       generate_readme
       generate_template
+      generate_long_running_process
     end
 
     def generate_template
@@ -58,6 +59,21 @@ module Drydock
       File.open(@destination + "/README.md", 'w') do |file|
         file.write(text)
       end
+    end
+
+    def generate_long_running_process
+      text = <<-TEXT
+#!/bin/bash
+
+echo "=> Starting Supervisor - exec supervisord -n"
+exec supervisord -n
+      TEXT
+
+      filename = @destination + "/run.sh"
+      File.open(filename, 'w') do |f|
+        f.write(text)
+      end
+      File.chmod(0755, filename)
     end
 
     def create_worker(index)
