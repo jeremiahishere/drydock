@@ -7,3 +7,10 @@ task :test do
   runner = Drydock::Launcher::TestRun.new(template, destination)
   runner.run
 end
+
+task :sshable do
+  template = ENV['TEMPLATE'] || "./docker-sshable.template.erb"
+  destination = ENV['DESTINATION'] || "./sshable_project"
+  runner = Drydock::Launcher::TestRun.new(template, destination)
+  runner.run
+end
