@@ -1,11 +1,15 @@
 module Drydock
   class Supervisor
     attr_accessor :job, :preconditions, :shared_data, :job_status
+    attr_reader :template, :destination
 
-    def initialize(jobs, preconditions)
+    def initialize(jobs, preconditions, template, destination)
       @job = jobs
       @preconditions = preconditions
       @shared_data = {}
+
+      @template = template
+      @destination = destination
 
       @job_status = {}
       @job.keys.each do |key|
@@ -14,7 +18,7 @@ module Drydock
 
       @worker_mutex = Mutex.new
 
-      @worker_count = 3
+      @worker_count = 1
       @worker_threads = []
       @workers = []
     end

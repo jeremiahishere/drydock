@@ -21,10 +21,15 @@ module Drydock
 
     def copy_files_to_destination(job)
       # make the directory in job.helper_dir
+      target = @supervisor.destination + '/' + job.helper_target_dir
+      Dir.mkdir(target) unless Dir.exists?(target)
 
       # loop through job.helper_files
+      job.helper_files.each do |filename|
         # copy from original location to target location
-
+        source_file = File.realpath + "/lib/drydock/jobs/" + job.helper_source_dir + "/" + filename
+        target_file = target + "/" + filename
+      end
     end
 
     def add_docket_commands_to_template(job)

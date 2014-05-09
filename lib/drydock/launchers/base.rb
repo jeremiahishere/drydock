@@ -15,7 +15,7 @@ module Drydock
       end
 
       def run
-        supervisor = Drydock::Supervisor.new(@jobs, @preconditions)
+        supervisor = Drydock::Supervisor.new(@jobs, @preconditions, @template, @destination)
         supervisor.start
       end
 
