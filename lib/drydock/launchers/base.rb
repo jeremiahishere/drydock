@@ -5,7 +5,7 @@ module Drydock
         @jobs = {}
         @preconditions = {}
         @template = template
-        @destination = File.realpath(destination.first == '/' ? destination : './' + destination)
+        @destination = File.realpath(destination)
         FileUtils.mkpath(@destination)
         setup
       end
