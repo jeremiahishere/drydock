@@ -4,7 +4,8 @@ module Drydock
 
       def helper_source_dir
         # stolen from the rails underscore method
-        self.class.name.gsub(/::/, '/').
+        # does not include the namespaces
+        self.class.name.split('::').last.
           gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
           gsub(/([a-z\d])([A-Z])/,'\1_\2').
           tr("-", "_").

@@ -15,7 +15,7 @@ module Drydock
       return if !id
 
       copy_files_to_destination(@supervisor.job[id])
-      add_docker_commands_to_template(@supervisor.job[id])
+      # add_docker_commands_to_template(@supervisor.job[id])
       finish_job(id)
     end
 
@@ -27,8 +27,9 @@ module Drydock
       # loop through job.helper_files
       job.helper_files.each do |filename|
         # copy from original location to target location
-        source_file = File.realpath + "/lib/drydock/jobs/" + job.helper_source_dir + "/" + filename
+        source_file = Dir.pwd + "/lib/drydock/jobs/" + job.helper_source_dir + "/" + filename
         target_file = target + "/" + filename
+        `cp #{source_file} #{target_file}`
       end
     end
 
