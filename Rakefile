@@ -2,6 +2,8 @@ require "bundler/gem_tasks"
 require 'drydock'
 
 task :test do
-  runner = Drydock::Launcher::TestRun.new("./dockerfile.template.erb", "/Users/jeremiah/code/docker_hello_world")
+  template = ENV['TEMPLATE'] || "./dockerfile.temlpate.erb"
+  destination = ENV['DESTINATION'] || "./docker_project"
+  runner = Drydock::Launcher::TestRun.new(template, destination)
   runner.run
 end
