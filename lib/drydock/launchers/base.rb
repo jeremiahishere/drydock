@@ -1,9 +1,12 @@
 module Drydock
   module Launcher
     class Base
-      def initialize
+      def initialize(template, destination)
         @jobs = {}
         @preconditions = {}
+        @template = template
+        @destination = File.realpath(destination.first == '/' ? destination : './' + destination)
+        FileUtils.mkpath(@destination)
         setup
       end
 
