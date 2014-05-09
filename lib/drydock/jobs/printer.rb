@@ -5,8 +5,8 @@ module Drydock
         @message = config[:message]
       end
 
-      def copy_files
-        ["printer/helper.sh"]
+      def helper_files
+        ["helper.sh"]
       end
 
       def docker_commands

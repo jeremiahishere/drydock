@@ -1,10 +1,24 @@
 module Drydock
   module Job
     class Base
+
+      def helper_source_dir
+        # stolen from the rails underscore method
+        self.class.name.gsub(/::/, '/').
+          gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+          gsub(/([a-z\d])([A-Z])/,'\1_\2').
+          tr("-", "_").
+          downcase
+      end
+
+      # can be overridden if you are feeling cool
+      def helper_target_dir
+        helper_source_dir
+      end
       
       # list of files that should be copied into the destination folder
       # they will automatically be copied to destination/name_of_job/<filename>.sh
-      def copy_files
+      def helper_files
         []
       end
 

@@ -14,8 +14,21 @@ module Drydock
       # it is an easy fix but I am moving on for now.  Sorry.
       return if !id
 
-      @supervisor.job[id].run
+      copy_files_to_destination(@supervisor.job[id])
+      add_docker_commands_to_template(@supervisor.job[id])
       finish_job(id)
+    end
+
+    def copy_files_to_destination(job)
+      # make the directory in job.helper_dir
+
+      # loop through job.helper_files
+        # copy from original location to target location
+
+    end
+
+    def add_docket_commands_to_template(job)
+      # @supervisor.commands += job.docker_commands
     end
 
     def start_next_job
