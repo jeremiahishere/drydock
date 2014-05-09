@@ -74,6 +74,7 @@ module Drydock
 
     def push_commands(commands)
       @command_mutex.synchronize do
+        @commands << '' unless @commands.empty?
         @commands += commands
       end
     end
