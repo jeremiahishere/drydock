@@ -11,9 +11,8 @@ module Drydock
 
       def docker_commands
         [
-          "RUN echo 'hello'",
+          "RUN echo '#{@message}'",
           "RUN ./printer/helper.sh",
-          "RUN echo 'goodbye'"
         ]
       end
     end

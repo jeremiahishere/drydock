@@ -1,5 +1,3 @@
-require 'debugger'
-
 module Drydock
   class Supervisor
     attr_accessor :job, :preconditions, :shared_data, :job_status, :commands
@@ -47,10 +45,11 @@ module Drydock
 
     def generate_template
       @generated_commands = @commands.join("\n")
-      debugger
-      erb = ERB.new(@template)
-      File.open(File.join(@destination, 'Dockerfile'), 'w') do |f|
-        f.write erb.result(binding)
+      File.open(@template, 'r') do |erbfile|
+        erb = ERB.new(erbfile.read)
+        File.open(File.join(@destination, 'Dockerfile'), 'w') do |f|
+          f.write erb.result(binding)
+        end
       end
     end
 
