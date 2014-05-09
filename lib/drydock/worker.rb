@@ -21,15 +21,15 @@ module Drydock
 
     def copy_files_to_destination(job)
       # make the directory in job.helper_dir
-      target = @supervisor.destination + '/' + job.helper_target_dir
+      target = File.join(@supervisor.destination, job.helper_target_dir)
       Dir.mkdir(target) unless Dir.exists?(target)
 
       # loop through job.helper_files
       job.helper_files.each do |filename|
         # copy from original location to target location
-        source_file = Dir.pwd + "/lib/drydock/jobs/" + job.helper_source_dir + "/" + filename
-        target_file = target + "/" + filename
-        `cp #{source_file} #{target_file}`
+        source_file = File.join(Dir.pwd, "lib/drydock/jobs", job.helper_source_dir, filename)
+        target_file = File.join(target, filename)
+        `cp #{source_file} #{target_file}` # I am pretty sure that you have to shell out here if this is running with multiple threads
       end
     end
 
